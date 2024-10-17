@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>overflow</title>
+</head>
+<body>
+
+  <style>
+    div{
+      width: 300px;
+      height: 200px;
+      border: 1px solid green;
+    }
+    #box1 {
+      overflow: hidden;
+    }
+    #box2 {
+      overflow: scroll;
+    }
+    #box3 {
+      overflow: auto;
+    }
+    #box4 {
+      overflow: visible;
+    }
+   
+  </style>
+
+  <!-- overflow: visible;(디폴트값) -->
+
+
+  <div id="box1">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vestibulum est a tincidunt laoreet. Maecenas ac sem erat. Vestibulum lectus ligula, venenatis id rhoncus vel, elementum eget justo. Vivamus ligula ex, maximus at dui quis, imperdiet eleifend libero. Vestibulum venenatis dictum nisi in vehicula. Cras vehicula sagittis lobortis. Vestibulum tempus tortor nulla, sed consequat arcu luctus nec. Nunc ut orci nec velit dictum iaculis. Interdum et malesuada fames ac ante ipsum primis in faucibus. In tortor lacus, iaculis a dictum vel, bibendum laoreet erat. Vivamus id sapien vehicula, aliquam turpis vitae, condimentum nisi. Cras mollis mollis feugiat. Nunc ornare odio ante, id condimentum libero volutpat in.
+  </div>
+
+  <!-- overflow: hidden;(숨김) -->
+  <div id="box2">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vestibulum est a tincidunt laoreet. Maecenas ac sem erat. Vestibulum lectus ligula, venenatis id rhoncus vel, elementum eget justo. Vivamus ligula ex, maximus at dui quis, imperdiet eleifend libero. Vestibulum venenatis dictum nisi in vehicula. Cras vehicula sagittis lobortis. Vestibulum tempus tortor nulla, sed consequat arcu luctus nec. Nunc ut orci nec velit dictum iaculis. Interdum et malesuada fames ac ante ipsum primis in faucibus. In tortor lacus, iaculis a dictum vel, bibendum laoreet erat. Vivamus id sapien vehicula, aliquam turpis vitae, condimentum nisi. Cras mollis mollis feugiat. Nunc ornare odio ante, id condimentum libero volutpat in.
+  </div>
+
+  <!-- overflow: scroll;(스크롤) -->
+  <div id="box3">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vestibulum est a tincidunt laoreet. Maecenas ac sem erat. Vestibulum lectus ligula, venenatis id rhoncus vel, elementum eget justo. Vivamus ligula ex, maximus at dui quis, imperdiet eleifend libero. Vestibulum venenatis dictum nisi in vehicula. Cras vehicula sagittis lobortis. Vestibulum tempus tortor nulla, sed consequat arcu luctus nec. Nunc ut orci nec velit dictum iaculis. Interdum et malesuada fames ac ante ipsum primis in faucibus. In tortor lacus, iaculis a dictum vel, bibendum laoreet erat. Vivamus id sapien vehicula, aliquam turpis vitae, condimentum nisi. Cras mollis mollis feugiat. Nunc ornare odio ante, id condimentum libero volutpat in.
+  </div>
+
+  <!-- overflow: auto; (자동) -->
+  <div id="box4">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vestibulum est a tincidunt laoreet. Maecenas ac sem erat. Vestibulum lectus ligula, venenatis id rhoncus vel, elementum eget justo. Vivamus ligula ex, maximus at dui quis, imperdiet eleifend libero. Vestibulum venenatis dictum nisi in vehicula. Cras vehicula sagittis lobortis. Vestibulum tempus tortor nulla, sed consequat arcu luctus nec. Nunc ut orci nec velit dictum iaculis. Interdum et malesuada fames ac ante ipsum primis in faucibus. In tortor lacus, iaculis a dictum vel, bibendum laoreet erat. Vivamus id sapien vehicula, aliquam turpis vitae, condimentum nisi. Cras mollis mollis feugiat. Nunc ornare odio ante, id condimentum libero volutpat in.
+  </div>
+
+  <hr>
+  <style>
+    .gnb{
+      margin-top: 300px;
+      list-style-type:none ;
+      padding:0;
+      overflow:hidden
+
+    }
+    .gnb>li{
+      float:left;
+      padding:10px;
+      border:1px solid gray;
+      text-align: center;
+    }
+  </style>
+
+    <ul class="gnb">
+      <li : class=>경제</li>
+      <li>정치</li>
+      <li>사회</li>
+      <li>생활/문화</li>
+      <li>it/과학</li>
+
+    </ul>
+    <div class="content">content</div>
+  
+</body>
+</html>

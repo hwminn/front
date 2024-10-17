@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>box_model</title>
+</head>
+<body>
+
+  <!-- 
+    box-sizing: content-box;
+    1.디폴트로 사용된다.
+    2.width와 height는 내용(content)의 크기를 의미한다.
+    3.실제 box크기 
+      내용(width/height)+ padding+ border
+   -->
+   <style>
+    #box1 {
+      width: 78px;
+      height: 78px;
+      padding: 10px;
+      border: 1px solid green;
+    }
+   </style>
+   <hr>
+   <div id="box1">box1</div>
+   <!-- 
+      box-sizing: border-box;
+      1. width와 height가 box의 크기를 의미한다.
+      2.padding이나 border가 적용된 경우 내용 (content의)크기를 스스로 조정한다.
+    -->
+    <style>
+      #box2 {
+        box-sizing: border-box;
+        width: 100px;
+        height: 100px;
+        padding: 10px;
+        border: 1px solid green;
+      }
+    </style>
+    <div id="box2">box2</div>
+
+</body>
+</html>

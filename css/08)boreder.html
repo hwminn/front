@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>border</title>
+</head>
+<body>
+
+  
+
+  <!-- 
+    border-width :테두리의 두께
+    border-style :테두리의 종류(dashed. dotted.double)
+    border-color :테두리의 색상
+   -->
+   <style>
+    #box1{
+      border-width: 1px;
+      border-style: solid;
+      border-color: green;
+    }
+   </style>
+   <div id="box1">box1</div>
+
+   <hr>
+   <!-- 
+      border 단축 속성
+      1.border 속성이다.
+      2.두께, 종류, 색상을 한 번에 지정한다.
+    -->
+    <style>
+      #box2 {
+        border: 1px solid green"
+            }
+    </style>
+    <div id="box2">box2</div>
+
+    <hr>
+
+    <!-- 
+      border-top
+      border-bottom
+      border-left
+      border-right
+     -->
+     <style>
+      #box3 {
+        border-top: 1px solid green;
+        border-bottom: 1px solid green;
+      }
+     </style>
+    <div id="box3">box3</div>
+
+    <hr>
+
+    <!-- 
+        border-radius 모서리 곡률
+    -->
+    <style>
+      #box4{
+        border: 1px solid green;
+        border-radius: 5px 10px 15px 20px;
+      }
+    </style>
+    <div id="box4">box4</div>
+
+    
+</body>
+</html>

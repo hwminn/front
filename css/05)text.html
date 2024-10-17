@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>text</title>
+<style>
+  #title1{
+    color:blue;
+    color:#52158f;
+    color:rgb(173, 196, 96);
+    color: rgba(0,0,0,0.5); /*alpha 투명도 0투명 1:불투명*/  
+  }
+  #title2{
+    /*글꼴, gillsans 우선순위적용 , 두번재 글꼴은 첫번째 글꼴 없으면 물려받음, 세번째도 마찬가지*/
+    /*sans-serif; 는 고딕계열 글꼴을 의미함*/
+    font-family: 'Gill Sans', 'Gill Sans MT', sans-serif;
+  
+  /*크기*/
+  font-size: 48px;
+  font-size: 1em; /*1em 은 디폴트 폰트크기*/
+    
+  /*크기*/
+  font-weight: 100; /*젤얇은크기*/
+  font-weight: 400; /*디폴트크기*/
+  font-weight: 900; /*가장 굵은 크기*/
+  
+  /*모양*/
+  font-style: normal; /*디폴트 모양*/
+  font-style: italic; /*기울인 모양*/
+  font-style: oblique; /*비스듬한 모양*/
+ 
+}
+#title3{
+  /*자간*/
+  letter-spacing: -0.5px;
+  /*꾸미기*/
+  text-decoration: underline;
+  text-decoration:none;
+
+  /*행높이*/
+  line-height: 32px; /* 텍스트 세로 가운데 맞춤용으로 주로 사용*/
+
+
+}
+#title4{
+/*벤더 프리픽스(vendor prefix) */
+/* -webkit- :크롬, 사파리*/
+/* -moz- : 파이어폭스*/
+/* -o- :오페라*/
+-webkit-text-stroke: teal;
+-webkit-text-stroke-width: 2px;
+}
+#title5{
+  /*글자정렬:블록 요소만 정렬되고 인라인 요소는 정렬되지 않는다*/
+  text-align: center;
+}
+#title6{
+  /*인라인 요소는 정렬 되지 않는다.*/
+  text-align: center;
+}
+
+</style>
+</head>
+
+<body>
+
+  <h1 id="title1">hello world</h1>
+  <h1 id="title2">hello world</h1>
+  <h1 id="title3">hello world</h1>
+  <h1 id="title4">hello world</h1>
+  <h1 id="title5">hello world</h1>
+  <span id="title6">hello world</span>
+
+  
+</body>
+</html>

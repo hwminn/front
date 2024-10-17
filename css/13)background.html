@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>background</title>
+</head>
+<body>
+  <!-- background-color -->
+<style
+  #box1{
+    width: 100px;
+    height: 20px;
+    background-color: green;
+  }
+</style>
+<div id="box1"></div>
+<hr>
+
+<!-- 
+    background-image
+    background-size
+    background-repeat
+    background-position
+ -->
+
+ <style>
+  #box2 {
+    box-sizing: border-box;
+    width: 300px;
+    height: 300px;
+    border:1px solid green;
+    background-image: url('../assets/animal10.jpg');
+    background-size: 300px 300px; /*100% 100%로 주는것과 같음*/
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    background-position: center;/*top,bottom,left,right,center*/
+
+  }
+ </style>
+ <div id="box2"></div>
+
+ <hr>
+ <style>
+  #box3{
+    box-sizing: border-box;
+    width: 300px;
+    height: 300px;
+    border: 1px solid green;
+    background-image: url(../assets/animal10.jpg);
+    background-size: contain;/*일반적으로 박스 내부에 여백이 생긴다 이미지를 박스 내부에 온전히 표시하기때문에*/
+    background-size:cover; /*이미지의 너비 높이중 작은 부분을 최대한 키운다. 박스 밖 부분은 표시되지 않는다*/
+    background-repeat: no-repeat;
+  }
+
+ </style>
+ <div id="box3"></div>
+
+ <hr>
+
+ <!-- background-position을 이용한 이미지 일부 노출 -->
+ <style>
+  #box4{
+    box-sizing: border-box;
+    width: 150px;
+    height: 100px;
+    border: 1px solid green;
+    background-image: url('../assets/logo.png');
+    background-position: -300px -200px; /*움직이는 건 배경 이미지이다*/
+                                        /*왼쪽으로 300px만큼 배경이동한것
+                                        y방향 위쪽으로 200px이동*/
+  }
+
+ </style>
+ <div id="box4"></div>
+</body>
+</html>

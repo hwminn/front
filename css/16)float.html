@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>float</title>
+</head>
+<body>
+  <!-- html 마크업 요소 배치 방식
+      1. 블록 요소: 위에서 아래로 배치한다/
+      2. 인라인 요소: 왼쪽에서 오른쪽으로 배치한다. -->
+      <!-- float속성
+      1.html 마크업 요소의 기본 배치를 무시하고 새롭게 배치할 수 있다. 
+      2. 왼쪽이나 오른쪽에 새롭게 배치할 수 있다.
+      3. float 된 요소에 의해서 기존의 다른 요소들의 배치에 변화가 생긴다.
+  -->
+  <style>
+    .wrap1 >div { 
+      box-sizing:border-box;
+      width: 100px;
+      height: 100px;
+      border: 1px solid green;
+      
+    }
+    .wrap1 >.box1 { 
+      float: left;
+    }
+    .wrap1 >.box2 {
+      float: left;
+    }
+  </style>
+
+  <div class="wrap1">
+    <div class="box1">box1</div>
+   <div class="box2">box2</div>
+
+  안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 
+  안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 
+  안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 
+  안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 
+  안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 
+  안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 
+  안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요
+  </div>
+
+  <hr>
+  <style>
+   .wrap2 >div { 
+      box-sizing:border-box;
+      width: 100px;
+      height: 100px;
+      border: 1px solid green;
+      
+    }
+  .wrap2  >.box1 {
+    float: left;
+  }
+  .wrap2 >.box2{
+    float: left;
+  }
+  .wrap2 >.box3{
+    clear: left;
+    width: 200px;
+    height: 300px;
+  }
+  /*float 영역을 벗어나기 위해서 clear 속성 사용*/
+    
+      </style>
+  <div class="wrap2">
+    <div class="box1">box1</div>
+    <div class="box2">box2</div>
+    <div class="box3">box3</div>
+  </div>
+   <hr>
+   <div>
+   <style>
+
+    .lbl-wrap{
+      width:100px;
+    float:left;
+   } 
+   .inp-wrap{
+    float:left;
+   }
+   .line-break{
+    clear:left;
+   }
+   </style>
+   
+    <div class="lbl-wrap"><label for="id">아이디</label></div>
+    <div class="inp-wrap"><input type="text" id="id"></div>
+    <div class="line-break"></div>
+    <div class="lbl-wrap"><label for="pw">비밀번호</label></div>
+    <div class="inp-wrap"><input type="password" pw="pw"></div>
+    </div>
+  
+    
+    
+
+    <hr>
+
+    <style>
+      .gnb{
+        list-style-type:none;
+        padding:0;
+        width: 500px;
+        margin:0 auto;
+      }
+      .gnb>li{
+        float:left;
+        padding:10px;
+        border: 1px solid gray;
+        text-align: center;
+      }
+        .content {
+          clear: left;
+        }
+        
+    </style>
+    <ul class="gnb">
+      <li : class=>경제</li>
+      <li>정치</li>
+      <li>사회</li>
+      <li>생활/문화</li>
+      <li>it/과학</li>
+
+    </ul>
+    <div class="content">content</div>
+</body>
+</html>

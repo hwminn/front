@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>visible</title>
+</head>
+<body>
+
+  <!-- 
+    <화면에서 요소를 숨기는 방법(요소자체가 사라지는 방법)>
+    1,width와 heigh을0으로 지정
+
+    2.position: absolute; 지정후 위치 지정 (예: top; -9999px;)
+
+    3.display:none;지면
+    <요소가 존재하지만 안 보이는 방법(요소의 영역은 남아있다>)
+    1)visibility: hidden; 지정
+    2)opacity:0; 지정(0: 투명, 1:불투명)
+  -->
+
+<style>
+
+  .wrap{
+   display: flex;
+  }
+  .flower{
+    width: 192px;
+    height: 128px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  .flower:nth-of-type(1){background-image: url('../assets/flower1.jpg');}
+  .flower:nth-of-type(2){background-image: url('../assets/flower2.jpg');}
+  .flower:nth-of-type(3){background-image: url('../assets/flower3.jpg');}
+  
+  .flower:nth-of-type(2) {
+   
+   opacity: 0;
+  }  
+    </style>
+  <div class="wrap">
+  <div class="flower"></div>
+  <div class="flower"></div>
+  <div class="flower"></div>
+  </div>
+<hr>
+
+<style>
+
+  .sentence-wrap{
+    position: relative;
+  }
+  .keyword{
+    position: absolute;
+    top: -9999px;
+  }
+  .sentence:hover +.keyword{
+    position:absolute;
+    top: 20px;
+    left: 50px;
+    border:1px solid tomato;
+    border-radius: 3px;
+    background-color: beige;
+    font-size: 0.8mm;  }
+</style>
+
+
+
+
+
+
+  <div class="sentence-wrap">
+    <div class="sentence">우리는 css를 배우고 있어요</div>
+    <div class="keyword">cascade style sheet</div>
+    
+  </div>
+  
+  
+
+
+
+
+
+
+</body>
+</html>

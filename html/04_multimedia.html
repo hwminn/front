@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>multimedia</title>
+</head>
+<body>
+  <!-- 
+    img.태그 
+    1.이미지를 추가하는 태그임
+    2.단독 태그임(열고닫는게 아니라는 의미)
+    3.주요 속성
+      1)src: 이미지의 경로를 작성하는것 (필수)
+      2)alt: 이미지 경로가 잘못된 경우 대신 나타날 텍스트임
+      3)width: 이미지의 너비를 픽셀단위로 나타냄
+      3)height: 이미지의 높이를 픽셀단위로 나타냄
+   -->
+
+   <!-- 
+      이미지 경로 작성법 
+      1.절대 경로는 사용할 수 없음 
+        C:/Users/Administrator.User -2023HSHWG/Desktop/animal10.jpg
+      2.상대 경로로 사용한다.
+    -->../assets/images/animal110.jpg
+
+    <img src="../assets/animal10.jpg" width="300px" alt="cat">
+    <hr>
+    <img src="D:/dev-lec/workspaces/front_lec/assets/animal10.jpg"alt="고양이">
+    <hr>
+    <!-- 
+      오디오
+      1.audio 태그와 source 태그로 구성됨
+      2.형식
+        <audio>
+          <source src="오디오경로">
+        </audio>
+      3.주요 속성
+        1)autoplay:자동
+        2)loop:반복
+        3)controls: 컨트롤 패널 표시(재생, 중지, 일시정지 등)
+     -->
+      <audio controls="controls">
+        <source src="../assets/t-rex-roar.mp3">
+        만약 브라우저가 &lt;audio&gt; 태그를 지원하지 않는다면 이 텍스트가 보입니다.
+      </audio>
+    <hr>
+    <video controls>
+      <source src="../assets/flower.webm">
+    </video>
+
+</body>
+</html>

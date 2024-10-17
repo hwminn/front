@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>연습문제</title>
+</head>
+<body>
+
+
+
+
+
+  <h1>연습1</h1>
+  <br>
+  <input type="email" placeholder="email@naver.com"><input type="password" placeholder="비밀번호">
+  <button type="submit">로그인</button>
+  <br>
+  <!-- 강사님이한 답안
+  <di<
+<form method="post">
+  <input type="text" placehoder=~~~ -->
+
+  
+
+
+
+
+
+  <h1>연습2</h1>
+
+<input type="email" placeholder="email">
+<br>
+<input type="password" placeholder="비밀번호">
+  <button type="submit">로그인</button>
+  <br>
+
+
+
+
+
+
+
+
+  <h1>연습3</h1>
+  <text>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;개인정보작성</text>
+  <br>
+  <text>이름</text>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<input type="text">
+  <br>
+  <text>메일주소</text>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<input type="text">
+  <br>
+  <text>연락처</text>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<input type="text">
+  <br>
+  <text>블로그,홈페이지</text>&nbsp; &nbsp;<input type="text">
+  <br>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+       <button type="submit">제출하기</button>
+       <button type="reset">다시작성</button>
+       <br>
+
+
+
+
+
+
+
+
+
+       <h1>연습4</h1>
+       <br>
+
+       <text>아이디</text>
+       <input type="text" placeholder="아이디">
+       <button type="submit">중복확인</button>
+       <br>
+       <text>비밀번호</text>
+       <input type="password" placeholder="새 비밀번호">
+       <br>
+       <text>비밀번호확인
+
+       </text>
+       <input type="password" placeholder="비밀번호 확인">
+       <br>
+       <text>이메일</text>
+       <input type="email" placeholder="email">
+       <text>@</text>
+       <input type="text" placeholder="직접입력가능" list="domains">
+       <datalist id="domains">
+        <option>naver.com</option>
+        <option>kakao.com</option>
+        <option>gmail.com</option>
+       </datalist>
+       <br>
+       <fieldset>
+       <legend>성별</legend>
+       <input type="radio"name="gender" value="male" checked>남자
+       <input type="radio"name="gender" value="female">여자
+      </fieldset>
+      <br>
+      <fieldset>
+        <legend>관심</legend>
+        <input type="checkbox"name="it" value="it">it
+        <input type="checkbox"name="경영" value="management">경영
+        <br>
+        <input type="checkbox"name="금융" value="finance">금융
+        <input type="checkbox"name="제조" value="manufacturing">제조
+        <br>
+        <input type="checkbox"name="서비스" value="service">서비스
+        <input type="checkbox"name="기타" value="others">기타
+      </fieldset>
+      <br>
+      <text>거주지</text> <input readonly placeholder="선택하세요">
+      <input type="text" list="지역">
+      <datalist id="지역">
+      <option>서울</option>
+      <option>경기</option>
+      <option>부산</option>
+      <option>제주</option>
+      </datalist>
+
+      <br>
+      <text>자기 소개</text>
+      <br>
+      <textarea rows="5" cols="40">200자이내 간단히 작성</textarea>
+
+      <br>
+      <text>이력서</text> <input type="file"multiple>
+      <br>
+      <text>제출일</text>
+      <input type="date">
+      <br>
+      <button type="submit">제출</button>
+       <button type="reset">다시입력</button>
+
+       <br>
+         <h1>답안</h1>
+         
+
+  <div>
+    <!-- 파일 첨부가 포함된 form은 method + enctype 필수 작성 -->
+    <form method="post" enctype="multipart/form-data">
+      <div>
+        <label for="id">아이디</label>
+        <input type="text" id="id" name="id" placeholder="아이디">
+        <button type="button" onclick="alert('중복확인되었습니다.')">중복확인</button>
+      </div>
+      <div>
+        <label for="pw">비밀번호</label>
+        <input type="password" id="pw" name="pw" placeholder="새 비밀번호">
+      </div>
+      <div>
+        <label for="pw2">비밀번호 확인</label>
+        <input type="password" id="pw2" placeholder="비밀번호 확인">
+      </div>
+      <div>
+        <label for="email">이메일</label>
+        <input type="text" id="email" name="email" placeholder="이메일">
+        <span>@</span>
+        <input type="text" list="domain" name="email" placeholder="직접 입력 가능">
+        <datalist id="domain">
+          <option>gmail.com</option>
+          <option>naver.com</option>
+          <option>daum.net</option>
+        </datalist>
+      </div>
+      <div>
+        <fieldset>
+          <legend>성별</legend>
+          <input type="radio" name="gender" value="man" id="man">
+          <label for="man">남자</label>
+          <input type="radio" name="gender" value="woman" id="woman">
+          <label for="woman">여자</label>
+        </fieldset>
+      </div>
+      <div>
+        <fieldset>
+          <legend>관심</legend>
+          <div>
+            <input type="checkbox" name="interests" value="1" id="it">
+            <label for="it">IT</label>
+            <input type="checkbox" name="interests" value="2" id="manage">
+            <label for="manage">경영</label>
+          </div>
+          <div>
+            <input type="checkbox" name="interests" value="4" id="finance">
+            <label for="finance">금융</label>
+            <input type="checkbox" name="interests" value="8" id="manufacture">
+            <label for="manufacture">제조</label>
+          </div>
+          <div>
+            <input type="checkbox" name="interests" value="16" id="service">
+            <label for="service">서비스</label>
+            <input type="checkbox" name="interests" value="32" id="etc">
+            <label for="etc">기타</label>
+          </div>
+        </fieldset>
+        <div>
+          <label for="address">거주지</label>
+          <select name="address" id="address">
+            <option value="">::선택하세요::</option>
+            <option value="seoul">서울</option>
+            <option value="daejeon">대전</option>
+            <option value="daegu">대구</option>
+            <option value="busan">부산</option>
+            <option value="incheon">인천</option>
+          </select>
+          <input type="text" name="address">
+        </div>
+        <div>
+          <div><label for="introduce">자기 소개</label></div>
+          <textarea rows="5" cols="40" name="introduce" id="introduce" placeholder="200자 이내 간단히 작성"></textarea>
+        </div>
+        <div>
+          <label for="attach">이력서</label>
+          <input type="file" name="attach" id="attach">
+        </div>
+        <div>
+          <label for="submit_dt">제출일</label>
+          <input type="date" name="submit_dt" id="submit_dt">
+        </div>
+        <div>
+          <button type="submit">제출</button>
+          <button type="reset">다시입력</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</body>
+
+</html>
+
+</body>
+</html>

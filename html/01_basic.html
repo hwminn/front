@@ -1,0 +1,123 @@
+<!--html comment -->
+
+<!--html5임을 알리는 선언부-->
+<!DOCTYPE html>
+
+<!--html 문서의 최상위 태그-->
+<html lang="ko">
+
+<!--html문서의 헤더 값을 담는 태그-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>basic</title>
+</head>
+
+<!--html본문만드는곳-->
+<body>
+  
+  <!--
+    html요소
+    1.블록요소
+     1)차지하는 영역이 해당 블록 전체
+     2)<div>,<p>,<h1> 등
+    2. 인라인 요소
+     1) 차지하는 영역이 컨텐츠 자체
+     2)<span>,<a>,<label>등
+  -->
+
+  <!--
+    html 문서 작성
+    1. 태그는 모두 소문자이다
+    2. 태그 이외의 영역엔 어떤 것도 넣지 않는다
+    3. 인라인 요소 안에는 블록요소가 들어가지 않도록 주의한다 
+  -->
+
+  <!--
+    div 태그 span태그는 인라인요소 
+    1.특별한 역할이 없음
+    2.요소를 인식시키기 위한 태그임
+    3.블록 요소임
+
+  -->
+<!-- 
+    br태그
+  1.줄바꿈태그이다
+  2. 단독 태그이다.
+-->
+  <div id="">hello</div>
+  <span>안녕하세요</span>
+  <span>반갑습니다</span>
+  <br><br/>
+
+
+  <!-- 
+    hr태그
+    1.수평선 태그임
+    2.단독 태그임
+   -->
+   <hr><hr/>
+
+   <!-- 
+      entitiy code
+      1.태그가 아니다 (특수 문자를 의미함)
+      2.&로 시작하고 ;으로 끝난다
+    -->
+    <div>작다(less than) &lt;</div>
+    <div>크다(greater thatn) &gt;</div>
+    <div>앰퍼센드 &amp;</div>
+    <div>공백 &nbsp;</div>
+
+    <!-- 
+      heading 태그 
+      1.제목을 만드는 태그
+      2.글자 크기와 굵기가 조정됨
+      3.6가지 종류가 있다
+      4.모두가 블록 요소임
+     -->
+     <h1>1번째 큰 제목32px</h1>
+     <h2>2번째 큰 제목</h2>
+     <h3>3번째 큰 제목</h3>
+     <h4>4번째 큰 제목16px</h4>
+     <h5>5번째 큰 제목</h5>
+     <h6>6번째 큰 제목</h6>
+     <h7>존재하지 않음</h7>
+
+     <!-- 
+      P태그
+      1.문단 태그
+      2.태그는 있는데 안에 내용이 없을경우 생성하지 않음 
+      -->
+      <P>여기는 문단입니다</P>
+
+      <!-- 
+        pre태그 pre formatted 
+        1.형식을 갖춘 문단태그임
+        2.입력한 그대로 나타남        
+       -->
+       <pre>
+        여기는 
+        줄바꿈 형식을 갖춘 문단입니다
+        ^   __   ^
+    </pre>
+    <!--
+      id 전역(entire) 속성
+      1.유일하게 식별되는 식별자 역할을 수행함
+      2.동일한 id 값을 가진 요소는 존재하면 안 된다
+      -->
+      <!-- 
+        class 전역 속성
+        1. 같은 성격을 가진 요소들을 그룹화하는 역할을 수행한다.
+        2. 동일한 class를 가진 요소는 존재할 수 있다.
+       -->
+      <div id="one" class="enjoy">one</div>
+      <div id="two"class="enjoy">two</div>
+      <!-- id 전역속성 확인을 위한 css스타일 태그 -->
+      <style>
+        /* #one은 id="one"인 요소를 의미한다.*/
+      #one{color:red;}
+      .enjoy {font: size 32px;}
+      /* .enjoy는 class="enjoy"인 요소들을 의미한다. */
+      </style>
+</body>
+</html>
