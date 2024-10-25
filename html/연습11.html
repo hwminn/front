@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  for(let dan=2; dan<=9; dan++){
+    document.write(`<div>${dan}단</div>`);
+    for(let su =1; su<=9; su++){
+      if(su>=6){
+        break;
+      }
+      document.write(`<div>${dan}x ${su}= ${dan*su}</div>`);
+    }
+  }
+</script>
+</body>
+</html>

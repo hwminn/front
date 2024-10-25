@@ -23,13 +23,45 @@
       1) 객체.속성
       2) 객체['속성']
 -->
-
+<h4>객체</h4>
+<script>
+  let movie={
+    title:'노트북',
+    director:'닉 카사베츠',
+    year:2004,
+    actors:['라이언 고슬링','레이첼 맥아담스'],
+    info:{
+      nation:'미국',
+      genre: '멜로/로맨스',
+      runningTime:'123'
+    }
+  }
+  document.write(`<div>제목 : ${movie.title}</div>`);
+  document.write(`<div>감독 : ${movie['director']}</div>`);
+  document.write(`<div>배우:`);
+  for(let i=0; i<movie.actors.length; i++){
+    document.write(`${movie.actors[i]},`);
+  }
+    document.write(`</div>`);
+  document.write(`<div>제작년도:${year}</div>`);
+</script>
 <!--
     객체 프로퍼티(속성, property)
     1. 문자열이나 Symbol을 사용할 수 있다.
     2. 동적 프로퍼티 생성을 지원한다.
     3. delete 연산자를 이용해서 객체의 특정 프로퍼티를 삭제할 수 있다.
 -->
+    <h4>객체 프로퍼티</h4>
+    <script>
+      //비어 있는 객체 
+      let car={}
+      car.maker='bmw';
+      car.model='x5';
+      //프로퍼티 삭제
+      delete car.model;
+      document.write(`<divr>제조사:${car.maker}</div>`);
+        document.write(`<divr>모델명:${car.model}</div>`);
+    </script>
 
 <!--
     for in 문
@@ -42,7 +74,20 @@
         본문
       }
 -->
-
+      <h4>for in 문</h4>
+      <script>
+        let book={
+          title:'채식주의자',
+          author:'한강',
+          price:15000,
+        }
+        for(let prop in book){
+          document.write(`<div>확인 불가${book}</div>`)};
+          for(let prop in book){
+            document.write(`<div>확인 가능:${book[prop]}</div>`);
+          }
+      </script>
+      
 <!--
     구조 분해 할당 (Destructuring Assignment)
     1. 객체의 각 프로퍼티 값을 개별 변수에 쉽게 할당할 수 있는 JavaScript 표현식이다.
@@ -51,6 +96,53 @@
     4. 형식
       { 변수1, 변수2, ... } = 객체
 -->
+<h4>구조 분해 할당</h4>
+<script>
+    let person={
+      name:'jessica',
+      age:30,
+      isMarried:false,
+      contacts:{'010-1111-1111','02-222-2222'},
+         }
+         let {name,isMarried}=person;
+         document.write(`<div>이름${name}</div>`);
+         document.write(`<div>${isMarried ? '기혼' : '미혼'}</div>`);
+         </script>
+         <script>
+
+         //새로운 변수 이름으로 재할당하기
+         let qna={
+          q:'what is the capital of korea?',
+          a:'Seoul',
+         }
+         let{q : question, a: anwswer}=qna;//프로퍼티 q값을 변수 q로 받아온 뒤 변수명을 question으로 바꾼다
+         document.write(`<div>${question}${anwswer}</div>`);
+</script>
+<script>
+/*목표)
+<div><a target="_blank" href="https://www.naver.com/">네이버</a></div>
+<div><a target="_blank" href="https://www.google.com/">구글</a></div>
+<div><a target="_blank" href="https://www.kakao.com/">카카오</a></div>
+*/
+  const sites=[
+    {
+      name:'네이버',
+      url:'https://www.naver.com'
+    },
+    {
+      name:'구글',
+      url:'https://www.google.com'
+    },
+    {
+      name:'카카오',
+      url:'https://www.kakao.com'
+    },
+  ]
+  for(const site of sites){
+    document.write(`<div><a target="_blank" href="${site.url}">${site.name}</a></div>`);
+  }
+</script>
+
 
 <!-- 문제. <a> 태그와 <img> 태그 넣기 -->
 <h1>&lt;a&gt; 태그와 &lt;img&gt; 태그 넣기</h1>
@@ -62,6 +154,22 @@
       <li><a href="https://www.naver.com/"><img src="../assets/images/logo_naver.png" width="192px"></a></li>
     </ul>
   */
+  const portals = [
+    {
+      url: 'https://www.google.com/',
+      logo: 'logo_google.png',
+    },
+    {
+      url: 'https://www.naver.com/',
+      logo: 'logo_naver.png',
+    },
+  ]
+  document.write('<ul>');
+  for(const portal of portals) {
+    document.write(`<li><a href="${portal.url}"><img src="../assets/images/${portal.logo}" width="192px"></a></li>`);
+  }
+  document.write('</ul>');
+ 
 
 </script>
 <hr>

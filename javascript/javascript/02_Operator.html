@@ -14,10 +14,12 @@
       3) 곱하기 : *            5 * 2 == 10
       4) 나누기 : /,           5 / 2 == 2.5
       5) 나머지 : %,           5 % 2 == 1
+      *tip. 몫이 필요한 경우 
+        parseInt함수를 사용 parseInt(5/2)==2
 
     2. 증감 연산자
-      1) ++
-      2) --
+      1) ++ : 전위 증가, 후위 증가
+      2) -- : 전위 감소, 후위 감소
 
     3. 대입 연산자 / 복합 대입 연산자
       1) 대입 : =
@@ -44,14 +46,118 @@
     7. 문자열 연결 연산자
       +, +=
 -->
+      <script>
+     
+      const a = 5;
+      const b = 2;
+      document.write(`<div>${a} +${b} =${a+b}</div>`);
+      document.write(`<div>${a} -${b} =${a-b}</div>`);
+      document.write(`<div>${a} *${b} =${a*b}</div>`);
+      document.write(`<div>${a} /${b} =${a/b}</div>`);
+      document.write(`<div>${a} %${b} =${a%b}</div>`);
+      </script>
+
+      <hr>
+
+      <script>
+          let i = 1;
+          let prePlus = ++i;//전위 증가. i를 먼저 증가한 뒤 prePlus에 할당
+          let postPlus= i++; // 후위 증가, i를 postPlus 에 할당한 뒤 나중에 증가
+          document.write(`<div>prePlus=${prePlus}</div>`);
+          document.write(`<div>prePlus=${prePlus}</div>`);
+          document.write(`<div>i=${i}</div>`);
+      </script>
+
+      <hr>
+
+      <script>
+        let n= 10;
+        document.write(`<div>${n += 10}</div>`);//(n=n+10)
+        document.write(`<div>${n -= 10}</div>`);
+        document.write(`<div>${n *= 10}</div>`);
+        document.write(`<div>${n /= 10}</div>`);
+        document.write(`<div>${n %= 10}</div>`);
+       
+
+
+      </script>
+
+
+      <hr>
+
+      <script>
+        const x = 10;
+        const y = 20;
+        const z = '10';
+
+        document.write(`<div>${x>y}</div>`);
+        document.write(`<div>${x>=y}</div>`);
+        document.write(`<div>${x<y}</div>`);
+        document.write(`<div>${x<=y}</div>`);
+        document.write(`<div>${x==z}</div>`);
+        document.write(`<div>${x===z}</div>`);
+        document.write(`<div>${x!=z}</div>`);
+        document.write(`<div>${x!==z}</div>`);
+      </script>
+
+      <hr>
+      <script>
+
+      const height = 185;
+      const balance = 3000;
+      // 난 키가 180 이상이고 통장잔액이 5000 이상이면 만나보겠다.
+      document.write(`<div>${height >= 180 && balance >= 5000}</div>`);
+      // 난 키가 180 이상이거나 통장잔액이 5000 이상이면 만나보겠다.
+      document.write(`<div>${height >= 180 || balance >= 5000}</div>`);
+      // 논리 AND 의 short circuit 확인 (false 가 나오면 더 이상 연산하지 않는다.)
+      document.write(`<div>${balance >= 5000 && ++height >= 180}</div>`);
+      document.write(`<div>height ${height}</div>`);
+      // 논리 OR 의 short circuit 확인 (true 가 나오면 더 이상 연산하지 않는다.)
+      document.write(`<div>${height >= 180 || ++balance >= 5000}</div>`);
+      document.write(`<div>balance ${balance}</div>`);
+     </script>
 
 <!--
     boolean 타입의 true 와 false
     1. true  : 데이터가 있으면 true 로 간주한다.  (1, 1.5, 'hello' 등)
     2. false : 데이터가 없으면 false 로 간주한다. (0, 0.0, '', undefined, null 등)
--->
 
+-->
+  <script>
+    document.write(`<div>${0 == false}, ${0 === false}</div>`);  // 간주한다 : 동일한 것으로 생각한다. 진짜 동일한 건 아니다.
+    let cabinet = 'dress';
+    document.write(`<div>${cabinet || 'pack'}</div>`);  // cabinet 에 값이 있으면 그 값을 사용하고, 없으면 pack 을 사용한다.
+  </script>
+  <hr>
+    <!--문제. 라면 박스 / -->
+    <script>
+      /*라면이 65개있다. 한 박스에 라면이 20개 들어간다. 몇박스 나오는지? 남는라면 갯수는?*/a
+      let ramen=65;
+      let box;
+      box=parseInt(ramen/20);
+      ramen %= 20;
+      document.write(`<div>라면박스 : ${box}개. 남은 라면 :${ramen}개</div>`);
+
+      
+
+    
+
+
+    </script>
 <!-- 문제. 일급 계산하기 -->
+ <!-- 문제. 일급 계산하기 -->
+<script>
+  /*
+    2025년 최저 시급 10,030원
+    10시간 근무하면 일급이 얼마인가?
+    8시간까지는 기본 시급, 초과 근무는 기본 시급의 1.5배
+  */
+  const hourlyWage = 10030;
+  const workingTime = 10;
+  const regularPay = hourlyWage * workingTime;  // 기본 시급 계산
+  const extraPay = (workingTime <= 8 ? 0 : workingTime - 8) * hourlyWage * 0.5;  // 기본 시급 1.5배 계산
+  document.write(`<div>${workingTime}시간 근무한 급여는 ${regularPay + extraPay}원입니다.`);
+</script>
 
 </body>
 </html>

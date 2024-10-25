@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+<!--
+    XMLHttpRequest 객체
+
+    1. 서버와 상호작용할 때 사용하는 객체이다.
+    2. 웹 페이지를 새로 고침하지 않고 지정한 서버로부터 데이터를 가져올 수 있다. (AJAX 프로그래밍)
+    3. XML 뿐만 아니라 모든 종류의 데이터를 받아올 수 있다.
+-->
+
+<!--
+    XMLHttpRequest 객체 속성
+    
+    1. readyState
+      1) 요청의 상태를 나타내는 숫자 값을 반환한다.
+      2) 종류
+          값 | 의미              | 상수
+          ---|-------------------|--------------------------------
+          0  | 클라이언트만 존재 | XMLHttpRequest.UNSENT
+          1  | 요청 생성         | XMLHttpRequest.OPENED
+          2  | 요청 전송         | XMLHttpRequest.HEADERS_RECEIVED
+          3  | 응답 받는 중      | XMLHttpRequest.LOADING
+          4  | 완료              | XMLHttpRequest.DONE
+          
+    2. response
+      1) 응답 개체 본문(response body)을 반환한다.
+      2) ArrayBuffer, Blob, Document, JavaScript Object, String 등과 같은 데이터를 포함한다.
+
+    3. responseText
+      1) 요청에 대한 응답을 텍스트(string)로 반환한다.
+      2) 요청이 실패하면 null 을 반환한다.
+
+    4. responseXML
+      1) 요청에 대한 응답을 포함한 Document 를 반환한다.
+      2) 요청이 실패하거나 XML/HTML 로 파싱할 수 없는 경우 null 을 반환한다.
+
+    5. status
+      1) 응답의 HTTP 상태 코드를 반환한다.
+      2) 주요 종류
+        --------------------------┬----------------------------------------------------------------------
+        HTTP Status               | 의미
+        --------------------------|----------------------------------------------------------------------
+        200 OK                    | 요청 성공
+        --------------------------|----------------------------------------------------------------------
+        400 Bad Request           | 잘못된 요청 (잘못된 문법으로 요청)
+        401 Unauthorized          | 미승인 (클라이언트가 누구인지 모름)
+        403 Forbidden             | 권한 없음 (클라이언트가 누구인지 알고 있음)      클라이언트 측 Error
+        404 Not Found             | 리소스를 찾을 수 없음 (잘못된 URL)
+        405 Method Not Allowed    | 요청한 메소드를 사용할 수 없음 (GET, POST 등)
+        --------------------------|----------------------------------------------------------------------
+        500 Internal Server Error | 서버 오류 발생 (코드 문제)                       서버 측 Error
+        --------------------------┴----------------------------------------------------------------------
+-->
+
+<!--
+    XMLHttpRequest 객체 메소드
+
+    1. XMLHttpRequest()
+      1) 생성자이다.
+      2) 형식
+          new XMLHttpRequest()
+    
+    2. XMLHttpRequest.abort()
+      1) 이미 요청을 전송한 경우 해당 요청을 중단한다.
+      2) 형식
+          abort()
+
+    3. XMLHttpRequest.open()
+      1) 요청을 초기화한다.
+      2) 형식
+          open(method, url)        : method → get, post 등
+                                     url    → 요청 주소
+          open(method, url, async) : async  → true 이면 비동기 요청, false 이면 동기 요청
+          open(method, url, async, user)
+          open(method, url, async, user, password)
+
+    4. XMLHttpRequest.send()
+      1) 요청을 전송한다. 비동기 요청인 경우 send() 를 호출한 즉시 응답을 반환환다.
+      2) 형식
+          send()
+          send(body) : body → 요청 본문 (ArrayBuffer, Blob, FormData, URLSearchParams 등)
+
+    5. XMLHttpRequest.setRequestHeader()
+      1) HTTP 요청 헤더 값을 설정한다.
+      2) open() 메소드와 send() 메소드 사이에서 호출한다. (선 open() 호출, 후 send() 호출)
+      3) 주요 HTTP 헤더 값
+        --------------------------------┬--------------------------------------------------------┬---------------------------------------------------------------
+        헤더 이름                       | 문법 및 *예시                                          | 의미
+        --------------------------------|--------------------------------------------------------|---------------------------------------------------------------
+        Accept                          | Accept: <MIME_type>/<MIME_subtype>                     | 클라이언트가 이해 가능한 컨텐츠 타입을 알려준다.
+                                        | * Accept: text/html, application/json                  |
+        --------------------------------|--------------------------------------------------------|---------------------------------------------------------------
+        Allow                           | Allow: <http-methods>                                  | 어떤 요청 메소드를 사용할 수 있는지 나열한다.
+                                        | * Allow: GET, POST, HEAD                               |
+        --------------------------------|--------------------------------------------------------|---------------------------------------------------------------
+        Authorization                   | Authorization: <type> <credentials>                    | 서버의 사용자 에이전트임을 증명하는 자격을 포함한다.
+                                        | * Authorization: Bearer bEqz2ud845ajkk10oAsit9lxcvr    |
+        --------------------------------|--------------------------------------------------------|---------------------------------------------------------------
+        Content-Disposition             | * Content-Disposition: inline                          | 컨텐츠가 브라우저에 포함(inline)되어야 한다.
+                                        | * Content-Disposition: attachment                      | 컨텐츠가 다운로드 되어야 한다.
+        --------------------------------|--------------------------------------------------------|---------------------------------------------------------------
+        Content-Type                    | Content-Type: <MIME_type>                              | 리소스의 media type 을 나타낸다.
+                                        | * Content-Type: text/html; charset=utf-8               | 
+        --------------------------------|--------------------------------------------------------|---------------------------------------------------------------
+        Referer                         | Referer: <url>                                         | 현재 요청을 보낸 페이지의 절대 주소 또는 부분 주소를 포함한다.
+                                        | * Referer: https://www.google.com                      | 
+        --------------------------------|--------------------------------------------------------|---------------------------------------------------------------
+        User-Agent                      | User-Agent: <product> / <product-version> <comment>    | 클라이언트의 애플리케이션, 운영체제, 제조업체, 사용자 에이전트
+                                        | * USer-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)| 요청 버전을 식별하는 독특한 문자열이다. 서버와 네트워크 피어가
+                                        |               AppleWebKit/537.36 (KHTML, like Gecko)   | 요청하는 정보이다.
+                                        |               Chrome/127.0.0.0 Safari/537.36           |
+        --------------------------------|--------------------------------------------------------|---------------------------------------------------------------
+        X-Forwarded-For                 | X-Forwarded-For: <client>, <proxy1>, <proxy2>          | HTTP 프록시나 로드 밸런서를 통해 웹 서버에 접속하는 클라이언트
+                                        | * X-Forwarded-For: 203.0.113.195, 70.41.3.18           | 의 원 IP 주소를 식별한다.
+                                        |                    클라이언트 IP, 거쳐온 프록시 IP     | (가장 왼쪽의 주소가 최초 클라이언트의 IP 주소이다.)
+        --------------------------------┴--------------------------------------------------------┴---------------------------------------------------------------
+-->
+
+<!--
+    XMLHttpRequest 객체 이벤트
+
+    1. error
+      1) 요청에서 오류가 나면 발생한다.
+      2) onerror 속성으로 이벤트를 수신(Event Listen)할 수 있다.
+
+    2. load
+      1) XMLHttpRequest 트랜잭션이 성공적으로 끝나면 발생한다.
+      2) onload 속성으로 이벤트를 수신(Event Listen)할 수 있다.
+
+    3. readystatechange
+      1) readyState 속성이 바뀔 때마다 발생한다.
+      2) onreadystatechange 속성으로 이벤트를 수신(Event Listen)할 수 있다.
+-->
+
+<!--
+    Fake API : https://thetestrequest.com
+    1. JSON 또는 XML 데이터를 제공하는 사이트이다.
+    2. REST 방식으로 동작한다.
+    3. 아직 BackEnd Server 가 없기 때문에 FrontEnd 수업에서 잠시만 사용한다.
+-->
+
+<!--
+    공공데이터 포털 서비스 활용하기(data.go.kr)
+
+    1. 상세기능
+        단기예보조회
+
+    2. 요청주소
+        http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst
+    
+    3. 요청변수(Request Parameter)
+        구분 | 항목명     | 항목설명                       | 샘플데이터
+        -----|------------|--------------------------------|--------------------
+        필수 | ServiceKey | 공공데이터포털에서 받은 인증키 | bEL0T8usfsZ1%2B...
+        필수 | pageNo     | 페이지번호                     | 1
+        필수 | numOfRows  | 한 페이지 결과 수              | 1000
+        필수 | base_date  | 발표일자                       | 20210628
+        필수 | base_time  | 발표시각                       | 0500 (05시 발표)
+        필수 | nx         | 예보지점 X 좌표                | 87
+        필수 | ny         | 예보지점 Y 좌표                | 141
+        옵션 | dataType   | 요청자료형식                   | XML/JSON (디폴트 XML)
+    
+    4. 응답결과(Response Element)
+        항목명     | 항목설명          | 샘플데이터
+        -----------|-------------------|--------------------
+        resultCode | 결과코드          | 00
+        resultMsg  | 결과메시지        | OK
+        numOfRows  | 한 페이지 결과 수 | 50
+        pageNo     | 페이지 번호       | 1
+        totalCount | 전체 결과 수      | 3
+        dataType   | 데이터 타입       | XML/JSON
+        baseDate   | 발표일자          | 20210628
+        baseTime   | 발표시각          | 0500 (05시 발표)
+        fcstDate   | 예보일자          | 20210628
+        fcstTime   | 예보시각          | 0600 (06시 예보)
+        category   | 자료구분문자      | TMP (온도)
+        fcstValue  | 예보 값           | 21 (21도)
+        nx         | 예보지점 X 좌표   | 87
+        ny         | 예보지점 Y 좌표   | 141
+-->
+<h4>공공데이터 요청하기(https://www.data.go.kr/data/15084084/openapi.do)</h4>
+<div id="div3">
+  <button type="button" id="public-data-btn">요청</button>
+  <div id="contents"></div>
+</div>
+<script>
+
+</script>
+<hr>
+
+
+
+<!-- 문제. FakeAPI 정보 가져오기 -->
+<h4>FakeAPI 정보 가져오기(https://jsonplaceholder.typicode.com/photos)</h4>
+<div>
+  <input type="text" id="album-id" placeholder="앨범ID (1 - 100)">
+  <button type="button" id="get-photo-btn">앨범정보요청</button>
+</div>
+<table border="1">
+  <thead>
+    <tr><td>앨범아이디</td><td>포토썸네일</td><td>포토아이디</td><td>포토제목(클릭하면 포토이미지 오픈)</td></tr>
+  </thead>
+  <tbody id="photos"></tbody>
+</table>
+<script>
+  /* 
+    https://jsonplaceholder.typicode.com/photos
+    앨범마다 포토가 50개씩 들어있는 상황의 정보가 제공된다.
+    각 앨범(albumId) 마다 50개의 포토(id) 정보가 수록되어 있다.
+    albumId 는 1 ~ 100 값을 가지고 있고, id 는 1 ~ 5000 값을 가지고 있다.
+  */
+
+</script>
+<hr>
+
+</body>
+</html>

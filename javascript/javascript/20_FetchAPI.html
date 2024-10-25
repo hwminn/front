@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+<!--
+    Fetch API
+
+    1. HTTP 파이프라인을 구성하는 요청과 응답 등의 요소를 JavaScript 에서 접근하고 조작할 수 있는 인터페이스를 제공한다.
+    2. Fetch API 가 제공하는 fetch() 전역 함수를 이용해 네트워크의 리소스를 쉽게 비동기적으로 취득할 수 있다.
+    3. Fetch API 는 XMLHttpRequest 와 달리 프로미스 기반으로 개선되었다.
+-->
+
+<!--
+    fetch() 전역 함수
+
+    1. 네트워크에서 자원을 취득한 뒤 응답 가능 상태가 되면 이를 이행하는 프로미스를 반환하는 함수이다.
+    2. fetch() 전역 함수가 반환하는 프로미스는 요청에 대한 응답 정보를 가진 Response 객체를 이행한다.
+    3. fetch() 프로미스는 네트워크 오류(보통 권한 문제 등)가 있을 때만 거부되며, 404 등의 HTTP 오류 시에는 거부되지 않는다.
+       따라서, then() 메소드에서는 Response.ok 또는 Response.status(200) 속성을 확인해야 한다.
+    4. 형식
+      fetch(resource, [options])
+      1) resource : 취득하려는 리소스(자원)의 정보
+        (1) 리소스의 URL 문자열 정보
+        (2) Request 객체
+      2) options : 리소스를 요청할 때 적용하고자 하는 사용자 지정 설정
+        (1) method      : 요청 메소드 (GET, POST, PUT, DELETE 등)
+        (2) headers     : 요청에 추가할 헤더 (Headers 객체, 문자열로 작성한 객체 리터럴)
+        (3) body        : 요청에 추가할 본문 (Blob, ArrayBuffer, FormData, URLSearchParams, ReadableStream 등)
+        (4) mode        : 요청에 사용할 모드 (cors, no-cors, same-origin)
+        (5) credentials : 요청할 때 브라우저의 자격증명 처리 방법 (omit, include, same-origin)
+-->
+
+<!--
+    Request
+
+    1. Fetch API 의 Request 인터페이스는 리소스 요청을 나타낸다.
+
+    2.  인스턴스 속성             | 의미                              | 값
+        --------------------------|-----------------------------------|------------------------------------
+        Request.body              | 요청 본문의 ReadableStream 이다.  |
+        Request.bodyUsed          | 요청 본문의 사용 여부를 나타낸다. | true, false
+        Request.cache             | 요청의 캐시 모드이다.             | default, reload, no-cache 등
+        Request.credentials       | 요청의 자격증명이다.              | omit, same-origin, include 등
+        Request.headers           | 요청에 연관된 Headers 객체이다.   |
+        Request.method            | 요청 메소드이다.                  | GET, POST 등
+        Request.mode              | 요청 모드이다.                    | cors, no-cors, same-origin 등
+        Request.referrer          | 요청의 리퍼러이다.                |
+        Request.referrerPolicy    | 요청의 리퍼러 정책이다.           | no-referrer, same-origin 등
+        Request.url               | 요청 URL 이다.                    |
+
+    3.  인스턴스 메소드           | 의미
+        --------------------------|------------------------------------------------------------------------
+        Request.blob()            | 요청 본문의 Blob 표현으로 이행하는 프로미스를 반환한다. (binary)
+        Request.formData()        | 요청 본문의 FormData 표현으로 이행하는 프로미스를 반환한다. (FormData)
+        Request.json()            | 요청 본문을 JSON으로 파싱한 결과로 이행하는 프로미스를 반환한다. (JSON)
+        Request.text()            | 요청 본문의 Text 표현으로 이행하는 프로미스를 반환한다. (Text, XML)
+-->
+
+<!--
+    Response
+
+    1. Fetch API의 Response 인터페이스는 요청에 대한 응답을 나타낸다.
+
+    2.  인스턴스 속성             | 의미                                   | 값
+        --------------------------|----------------------------------------|-------------------------------
+        Response.body             | 본문 내용의 ReadableStream 이다.       |
+        Response.bodyUsed         | 응답 본문의 사용 여부를 나타낸다.      | true, false
+        Response.headers          | 응답에 연관된 Headers 객체이다.        |
+        Response.ok               | 응답의 성공 여부를 나타낸다.           | true, false
+        Response.status           | 응답의 상태 코드이다.                  | 성공 시 200
+        Response.statusText       | 상태 코드에 해당하는 상태 메시지이다.  | 200이면 OK
+        Response.url              | 응답 URL 이다.                         |
+
+    3.  인스턴스 메소드           | 의미
+        --------------------------|------------------------------------------------------------------------
+        Response.blob()           | 응답 본문의 Blob 표현으로 이행하는 프로미스를 반환한다. (binary)
+        Response.formData()       | 응답 본문의 FormData 표현으로 이행하는 프로미스를 반환한다. (FormData)
+        Response.json()           | 응답 본문을 JSON으로 파싱한 결과로 이행하는 프로미스를 반환한다. (JSON)
+        Response.text()           | 응답 본문의 Text 표현으로 이행하는 프로미스를 반환한다. (Text, XML)
+-->
+
+<!--
+    async 함수
+
+    1. async function 선언을 통해 하나의 비동기 함수를 정의할 수 있다.
+    2. 항상 Promise 를 반환한다. 만약 반환 값이 명시적으로 Promise 가 아니라면 암묵적으로 Promise 를 사용하여 결과를 처리하여 반환한다.
+    3. 아래는 동일한 코드이다.
+        ----------------------------------------------------------------
+          async function fnName() {   |   function fnName() {
+            return 1;                 |     return Promise.resolve(1);      동일한 코드
+          }                           |   }
+        ----------------------------------------------------------------
+    4. async 함수에는 await 문이 포함될 수 있다.
+-->
+
+<!--
+    await 문
+
+    1. 함수의 실행을 일시 중지하고 전달된 Promise 의 해결을 기다린 다음 async 함수의 실행을 시작하고 완료 후 값을 반환한다.
+    2. 아래는 동일한 코드이다.
+        -----------------------------------------------------------------------------------
+          async function fnName() {   |   function fnName() {
+            await 1;                  |     return Promise.resolve(1).then(() => undefined)
+          }                           |   }
+        -----------------------------------------------------------------------------------
+    3. async 함수가 아닌 곳에서 사용하면 SyntaxError 가 발생한다.
+    4. await 문이 없는 async 함수는 일반 함수처럼 동기적으로 실행된다.
+-->
+
+
+
+<!-- 문제1. 로그인 -->
+<h4>로그인</h4>
+<form id="login-form">
+  <div><input type="text" name="id" placeholder="Id"></div>
+  <div></div><input type="password" name="password" placeholder="Password"></div>
+  <div></div><button type="button" id="login-btn">Log In</button></div>
+</form>
+<script>
+  /*
+    fetch() 함수를 이용하여 다음 조건에 따라 로그인을 요청하는 코드를 작성하시오.
+    1. 요청 url       : /user/login.do
+    2. 요청 method    : post
+    3. 요청 parameter : login-form 내부의 입력 요소
+  */
+
+</script>
+<hr>
+
+
+
+<!-- 문제2. 파일 첨부 -->
+<h4>파일 첨부</h4>
+<div>
+  <div>
+    <label for="username">이름</label>
+    <input type="text" id="username">
+  </div>
+  <div>
+    <label for="profile">프로필</label>
+    <input type="file" id="profile" accept="image/*">
+  </div>
+  <div>
+    <button type="button" id="upload-btn">업로드</button>
+  </div>
+</div>
+<script>
+  /*
+    다음 가상의 API 문서를 참고하여 파일 첨부를 수행하는 코드를 완성하시오.
+
+    1. 요청
+      1) 주소     : /user/profileUpload.do
+      2) 메소드   : post
+      3) 파라미터 : username, profile
+    2. 응답
+      1) 타입 : application/json
+      2) 예시 : {"isSuccess": true} 또는 {"isSuccess": false}
+    3. 요구사항
+      async 함수와 await 문을 반드시 사용하시오.
+  */
+  
+</script>
+<hr>
+
+</body>
+</html>

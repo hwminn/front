@@ -12,36 +12,16 @@
   #image1{
      background-image: url('../assets/fruit1.jpg');
   }
+  
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <ul>
-      <li>
-        <div class="image" id="image1"></div>
-        <div class="describe">
-          <h1>과일1</h1>
-          <p>맛있는 과일</p>
-          <p>가격 : 10,000원</p>
-        </div>
-      </li>
-      <li>
-        <div class="image" id="image2"></div>
-        <div class="describe">
-          <h1>과일2</h1>
-          <p>싱싱한 과일</p>
-          <p>가격 : 20,000원</p>
-        </div>
-      </li>
-      <li>
-        <div class="image" id="image3"></div>
-        <div class="describe">
-          <h1>과일3</h1>
-          <p>달콤한 과일</p>
-          <p>가격 : 30,000원</p>
-        </div>
-      </li>
-    </ul>
-  </div>
+  <script>
+  const hourlyWage = 10030;
+  const workingTime = 10;
+  const regularPay = hourlyWage * workingTime;  // 기본 시급 계산
+  const extraPay = (workingTime <= 8 ? 0 : workingTime - 8) * hourlyWage * 0.5;  // 기본 시급 1.5배 계산
+  document.write(`<div>${workingTime}시간 근무한 급여는 ${regularPay + extraPay}원입니다.`);
+</script>
 </body>
 </html>
