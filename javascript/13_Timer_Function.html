@@ -16,7 +16,14 @@
         (2) 취소
           clearTimeout(timerId);
 -->
-
+<h4> setTimeout함수</h4>
+<script>
+  const timeoutId=setTimeout(()=>{
+    console.log('hello');
+  },1000);
+  console.log(timeoutId);
+  clearTimeout(timeoutId);
+</script>
 <!--
     2. setInterval()
       1) 지정한 시간(밀리초) 마다 반복해서 동작한다.
@@ -26,7 +33,17 @@
         (2) 취소
           clearInterval(timerId);
 -->
-
+          <h4>setInterval함수</h4>
+<script>
+  let count=0;
+  const intervalID=setInterval(()=>{
+    count++;
+    console.log(count+'번째 hello')
+    if(count===10){
+      clearInterval(intervalID);
+    }
+  },1000);
+</script>
     
 
 <!-- 문제. timer() 함수 구현하기 -->
@@ -41,7 +58,28 @@
     3. 반환
       없음
   */
+  //setInterval함수
+  /*const timer= (seconds)=>{
+    const timerId=setInterval(()=>{
+      if(seconds===0){
+        clearInterval(timerId);
+        return;
+      }
+      document.write(`<div>${seconds--}</div>`);
+    },1000);
+  }
+  timer(5);
+  */
+  //setTimeout함수=재귀호출 
+  const timer= (seconds)=>{
+    setTimeout(()=>{
+      if(seconds===0)
+        return;// timer함수종료
   
+    document.write(`<div>${seconds--}</div>`);
+    timer(seconds);  },1000);
+  }
+  timer(5);
 </script>
 <hr>
 

@@ -80,7 +80,64 @@
         }
         button.onclick = eventHandler;
 -->
+<h4>고전 이벤트 모델</h4>
+<div>
+  <div id="box1">box1</div>
+  <div><button type="button" id="btn1">btn1</button></div>
+  </div>
+  
+  <script>
+    //이벤트 종류는 type속성 , click속싱이 사용되었고
+    //이벤트 속성은 onclick이벤트 속성이 사용되었다.
+    //이벤트 대상: target  속성, btn1이다. 
+    //이벤트 리스너 (이벤트 핸들러): function(event){}
+    const box1 = document.getElementById('box1');
+    const btn1 = document.getElementById('btn1');
 
+    btn1.onclick=function(event){
+      box1.textContent='이벤트 종류:' +event.type;
+      box1.textContent+= ' ,이벤트 대상:'+event.target.textContent;
+    }
+    /*이벤트리스너등록확인*/
+    </script>
+    <div>
+    <div id="box2">box2</div>
+     <div><button type="button" id="btn2">btn2</button></div>
+     </div>
+  
+    <script>
+
+    const box2 = document.getElementById('box2');
+    const btn2 = document.getElementById('btn2');
+
+    function do1(event){
+      box2.textContent+='이벤트 종류:'+event.type;
+    }
+    function do2(event){
+      box2.textContent+='이벤트 대상:'+event.target.textContent;
+    }
+    btn2.onclick=function(event){
+      do1(event);
+      do2(event);
+    }
+  </script>
+<hr>
+<h4>표준이벤트모델</h4>
+<div>
+  <div id="box3">box3</div>
+  <div><button type="button" id="btn3">btn3</button></div>
+</div>
+<script>
+  const box3=document.getElementById ('box3');
+  const btn3=document.getElementById ('btn3');
+
+  btn3.addEventListener('click',function(event){
+    box3.textContent+='이벤트 타입 :' +event.type;
+  })
+  btn3.addEventListener('click',function(event){
+    box3.textContent+= '이벤트 대상:'+event.target.textContent;
+  })
+</script>
 <!--
     표준 이벤트 모델
     1. EventTarget 인터페이스의 addEventListener() 메소드를 호출하는 방식이다.
@@ -118,7 +175,17 @@
 
       }
 -->
+<h4>인라인이벤트모델</h4>
+<div>
+  <div id="box4">box3</div>
+  <div><button type="button" id="btn4"onclick="fnInline(event)">btn4</button></div>
+</div>
+<script>
+  
+  const box4=document.getElementById('box4');
 
+  function fnInline(event){box4.textContent='이벤트종류:'+event.type;}
+</script>
 <!--
     이벤트 전파
     1. 이벤트 버블링(Event Bubbling)이라고 한다.

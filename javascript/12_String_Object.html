@@ -94,10 +94,95 @@
         → 호출 문자열의 시작과 끝에서 공백이 제거된 새로운 문자열을 반환
         → 한쪽 끝의 공백만 제거하려면 trimStart() 나 trimEnd() 를 사용
 -->
+<h4>String 내장 객체</h4>
+<script>
+
+  var str = 'JavaScript';
+
+  document.write(`<div>길이 : ${str.length}</div>`);
+
+  document.write(`<div>첫 글자 : ${str.at(0)}</div>`);
+  document.write(`<div>첫 글자 : ${str.charAt(0)}</div>`);
+  document.write(`<div>마지막 글자 : ${str.at(-1)}</div>`);
+  document.write(`<div>마지막 글자 : ${str.charAt(str.length - 1)}</div>`);
+
+  document.write(`<div>첫 번째 소문자 a 의 인덱스 : ${str.indexOf('a')}</div>`);
+  document.write(`<div>마지막  소문자 a 의 인덱스 : ${str.lastIndexOf('a')}</div>`);
+  
+  if(str.startsWith('Java')) {
+    document.write('<div>Java로 시작합니다.</div>');
+  }
+  if(str.endsWith('Script')) { 
+    document.write('<div>Script로 끝납니다.</div>');
+  }
+  
+  const regUpper = /[A-Z]/g;  // 대문자 정규식
+  document.write(`<div>${str.match(regUpper)}</div>`);  // 대문자를 모두 찾아서 배열로 반환
+  document.write(`<div>${str.search(regUpper)}</div>`); // 첫 번째 대문자의 인덱스를 반환
+  
+  document.write(`<div>${str.padStart(15, '*')}</div>`);  // str 의 길이가 15가 되도록 * 를 왼쪽에 채우시오.
+  document.write(`<div>${str.padEnd(15, '*')}</div>`);    // str 의 길이가 15가 되도록 * 를 오른쪽에 채우시오.
+  
+  document.write(`<div>${str.replace('a', 'A')}</div>`);     // 문자열 'a'는 첫 번째 항목만 'A'로 바뀜
+  document.write(`<div>${str.replaceAll('a', 'A')}</div>`);  // 모든 'a'가 'A'로 바뀜
+  
+  document.write(`<div>${str.replace(/[A-Z]/g, 'A')}</div>`);     // 모든 대문자가 'A'로 바뀜
+  document.write(`<div>${str.replaceAll(/[A-Z]/g, 'A')}</div>`);  // 모든 대문자가 'A'로 바뀜
+
+  document.write(`<div>${str.slice(4)}</div>`);         // 인덱스 4부터 끝까지
+  document.write(`<div>${str.slice(0, 4)}</div>`);      // 인덱스 0부터 인덱스 3까지
+  document.write(`<div>${str.substring(4)}</div>`);     // 인덱스 4부터 끝까지
+  document.write(`<div>${str.substring(0, 4)}</div>`);  // 인덱스 0부터 인덱스 3까지
+  document.write(`<div>${str.substr(4)}</div>`);     // 인덱스 4부터 끝까지 (deprecated)
+  document.write(`<div>${str.substr(0, 4)}</div>`);  // 인덱스 0부터 4글자  (deprecated)
+
+  document.write(`<div>${str.slice(-6)}</div>`);        // 인덱스 -6부터(뒤에서 6번째 글자) 끝까지
+  document.write(`<div>${str.slice(-10, -6)}</div>`);   // 인덱스 -10부터 인덱스 -7까지
+
+  var str = 'Jan,Feb,Mar,April,May';
+  var ary = str.split(',');
+  ary.forEach((element, i) => document.write(`<div>인덱스 ${i} : ${element}</div>`));
+
+  document.write(`<div>소문자 : ${str.toLowerCase()}</div>`);
+  document.write(`<div>대문자 : ${str.toUpperCase()}</div>`);
+
+  var str = '  JavaScript  ';
+  document.write(`<div>${str.trim()}, ${str.trim().length}</div>`);
+  document.write(`<div>${str.trimStart()}, ${str.trimStart().length}</div>`);
+  document.write(`<div>${str.trimEnd()}, ${str.trimEnd().length}</div>`);
+
+</script>
+<hr>
+
+<!-- 문제1. yesCheck() 함수 구현하기 -->
+<script>
+  /*
+    yesCheck() 함수
+    1. 기능
+      인자가 'yes', 'Yes', 'YES', 'y', 'Y', '  yes', '  yes' 등 yes 를 의미하면 true 를 반환하는 함수
+    2. 인자
+      문자열 1개
+    3. 반환
+      true 또는 false
+  */
+  const yesCheck = (param) => {
+    const str = param.trim().toLowerCase();
+    return str === 'yes' || str === 'y';
+  }
+  const arr = ['yes', 'Yes', 'YES', 'y', 'Y', 'No', '  yes', '  yes'];
+  arr.forEach((element) => {
+    if(yesCheck(element)) {
+      document.write(`<div>${element}는 yes 입니다.</div>`);
+    } else {
+      document.write(`<div>${element}는 yes 가 아닙니다.</div>`);
+    }
+  })
+</script>
+<hr>
 
 
 
-<!-- 문제1. addCarMaker() 함수 구현하기 -->
+<!-- 문제2. addCarMaker() 함수 구현하기 -->
 <h4>addCarMaker() 함수</h4>
 <script>
   /*
@@ -109,13 +194,36 @@
     3. 반환
       없음
   */
-
+  let cars = [
+    { model: 'K3' },
+    { model: 'K5' },
+    { model: 'K8' },
+    { model: 'K9' },
+    { model: 'GV70' },
+    { model: 'G80' },
+    { model: 'GV80' },
+  ]
+  const addCarMaker = (params) => {
+    params
+      .map(car => {
+        var maker;
+        if(car.model.startsWith('K')) {  // car.model.at(0) === 'K'
+          maker = 'Kia';
+        } else if(car.model.startsWith('G')) {
+          maker = 'Genesis';
+        }
+        car.maker = maker;
+        return car;
+      })
+      .forEach(car => console.log(car));
+  }
+  addCarMaker(cars);
 </script>
 <hr>
 
 
 
-<!-- 문제2. change() 함수 구현하기 -->
+<!-- 문제3. change() 함수 구현하기 -->
 <h4>change() 함수</h4>
 <script>
   /*
@@ -130,9 +238,13 @@
       모든 origin 을 replacement 로 변경한 결과
     4. 제한사항
       이 문제는 연습을 위한 것으로 이미 replace() 와 같은 함수가 JavaScript 에 구현되어 있음을 알고 시작할 것.
-      change() 함수를 구현할 때 반드시 String 의 split(), join() 인스턴스 메소드를 모두 사용할 것.
+      change() 함수를 구현할 때 반드시 String 의 split(), Array 의 join() 인스턴스 메소드를 모두 사용할 것.
   */
-  
+  // '192.168.0.210' -> ['192', '168', '0', '210'] -> '192_168_0_210'
+  //              split('.')                   join('_')
+  const change = (str, origin, replacement) => str.split(origin).join(replacement);
+  document.write(change('192.168.0.210', '.', '_'));  // 192_168_0_210
+
 </script>
 <hr>
 
