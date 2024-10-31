@@ -1,19 +1,44 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
 </head>
 <body>
+<!-- 로그인창만들기 -->
+<div>
+ <form id="login-form" action="/user/login.do" method="post">
+ <div><input type="text" id="id" placeholder="id"></div>
+ <div><input type="password" pw="pw" placeholder="pw" class="dis"></div>
+ <span id="eye" class="eye">
+  <i class="fa-regular fa-eye-slash"></i>
+</span>
+ <div><button type="submit">log in</button></div>
+</form>
+</div>
 
-  <script>
-    var name="john"
-    console.log(name);
-    var name="john"
-    greet();
-    
-  </script>
-  
+<script>
+const loginFOrm=document.getElementById('login-form');
+const ID=document.getElementById('id');
+const password=document.getElementById('password');
+
+loginFOrm.addEventListener('submit',function(event){
+  if(id.value===''){
+    alert('아이디를 입력하세요');
+    id.focus();
+    event.preventDefault();
+    return;
+  }else if(password.value===''){
+    alert('비밀번호를 입력하세요');
+    password.focus();
+    event.preventDefault();
+    return;
+  }
+})
+
+</script>
+0
 </body>
 </html>

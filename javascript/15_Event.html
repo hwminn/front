@@ -25,9 +25,9 @@
       2) 이벤트 리스너 : 이벤트가 발생했는지 체크
     3. 이벤트 핸들러가 동작할 때는 발생한 이벤트에 대한 각종 정보가 담긴 "이벤트 객체(Event Object)"가 인자로 자동 전달된다.
     4. 이벤트가 발생했을 때 이벤트 핸들러를 할당하는 방법을 "이벤트 모델(Event Model)"이라고 한다.
-      1) 고전 이벤트 모델
-      2) 표준 이벤트 모델
-      3) 인라인 이벤트 모델
+      1) 고전 이벤트 모델 ->dom.onclick처럼 이벤트 속성을 붙힘 (실행할 함수를 할당)
+      2) 표준 이벤트 모델 ->dom.addEventListner('click'function(event){})
+      3) 인라인 이벤트 모델-> <tag onclick>
 -->
 
 <!--
@@ -194,14 +194,131 @@
     4. 최상위 조상에 도달할때까지 이 과정은 계속해서 반복된다.
     5. 이벤트 객체의 stopPropagation() 메소드를 이용해 이벤트 전파를 중지할 수 있다. 다만 특별한 이유가 없다면 중지할 필요가 없다.
 -->
+    <style>
+    .bubble{
+      margin:10px; 
+      border: 1px solid green;
+    }
+    </style>
+<h4>이벤트 버블링</h4>
+<div id="ancestor" class="bubble" >
+  조상 div
+  <div id="parent" class="bubble">
+    부모 div
+    <div id="child" class="bubble">
+      자식 div     
+    </div>
+  </div>
+</div>
+<script>
+  const ancestor=document.getElementById('ancestor');
+  const parent=document.getElementById('parent');
+  const child=document.getElementById('child');
+  ancestor.addEventListener('click',(event)=>{
+    alert(`최초 이벤트 발생 : ${event.target.id},현재 이벤트 발생 ${event.currentTarget.id}, this :${this.id}`);
+  }) 
+  parent.addEventListener('click',function(event){
+    alert(`최초 이벤트 발생 : ${event.target.id},현재 이벤트 발생 ${event.currentTarget.id}, this :${this.id}`);
+  }) 
+  child.addEventListener('click',function(event){
+    alert(`최초 이벤트 발생 : ${event.target.id},현재 이벤트 발생 ${event.currentTarget.id}, this :${this.id}`);
+  }) 
+</script>
+<!-- 
+  this
+  1.어떤 함수를 호출하는 객체를 의미한다.
+  2.함수 호출 방식에 따라서 this 객체가 달라진다.
+    1) 전역함수, 콜백함수, 내부함수:window 전역 객체
+    2) 객체의 프로퍼티에 저장된 함수:해당 객체
+    3) 자바스크립트의 함수는 매개변수로 전달되는 인자 이외에 암묵적으로 this를 전달 받는다/
+    4) 화살표 함수는 this에 자체 바인딩이 포함되지 않는다. 
+    5) 이벤트 핸들러가 화살표 함수인 경우 this 는 사용하지 않는다.
+ -->
+  <h4>this</h4>
+  <script>
+    //전역함수
+    function fnGlobal(){
+    console.log(this);
+    }
+    fnGlobal();
 
+    function fnCallback(callback){
+      callback();
+    }
+    fnCallback(function(){
+      console.log(this);
+    })
+    //객체에 포함된 함수
+    const car ={
+      model: 'x5',
+      drive:function(){
+        console.log(this);
+        console.log(this.model+'타고 드라이브');//this.model은 car.model을 의미한다. 
+      },parking: ()=>{
+        console.log(this);
+        console.log(this.model+'주차중');//화살표 함수는 this를 사용하면 window가 잡힌다 따라서 화살표 함수는 this에 car객체를 바인딩 하지못함. 
+      }
+    }
+    car.drive();
+    car.parking();
+    
+  </script>
+  <hr>
 <!-- 
     이벤트 위임 (Event Delegation)
-    1. 자식에게 할당된 이벤트는 부모에게 전파된다.
+    1. 자식에게 할당된 이벤트는 부모에게 전파된다.=버블링 이야기임 
     2. 자식이 처리해야 할 이벤트를 의도적으로 부모가 처리하게끔 만들 수 있다. 이를 이벤트 위임이라고 한다.
     3. 대표적으로 모든 자식들에게 반복해서 여러 번 할당해야 할 이벤트를 최상위 조상에게 한 번만 할당하는 방식이 있다.
 -->
+<h4>이벤트위임</h4>
+<style>
+  table{
+    border: 3px solid rgb(180, 51, 142);
+    border-collapse: collapse;
+  }
+  table td{
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    border:1px solid rgb(151, 218, 50);
+  }
+  .selected-td{
+    background-color: rgb(211, 111, 131);
+  }
 
+</style>
+<table id="table">
+  <tbody>
+    <tr>
+      <td>Drama</td>
+      <td>Effiel</td>
+      <td>Fuel</td>
+    </tr>
+    <tr>
+      <td>Giant</td>
+      <td>Hidden</td>
+      <td>Ivy</td>
+    </tr>
+    <tr>
+      <td>Korea</td>
+      <td>Japan</td>
+      <td class="selected-td">China</td>
+    </tr>
+  </tbody>
+</table>
+<script>
+  let selectedTd;
+  const table=document.getElementById('table');
+  table.addEventListener('click',function(event){
+    const td= event.target;
+    if(selectedTd !==undefined)
+    selectedTd.classList.remove('selected-td');
+    selectedTd=td;
+    selectedTd.classList.add('selected-td');
+  
+
+  })
+</script>
 <!--
     디폴트 이벤트
     1. 어떤 DOM 객체는 특정 이벤트를 이미 가지고 있다.
@@ -210,27 +327,60 @@
       2) <form> 태그는 submit 하면 action 속성으로 입력 폼 요소의 데이터를 전송하고 입력 폼 요소의 값을 초기화한다.
     3. 이벤트 객체의 preventDefault() 메소드를 호출하면 디폴트 이벤트 동작을 막을 수 있다.
 -->
+<h4>디폴트 이벤트</h4>
+<div>
+  <a href="https://www.naver.com/" target="_blanks" id="naver-link">Naver</a>
+</div>
+<script>
+  const naverLink=document.getElementById('naver-link');
 
+  let visited=false;
+  naverLink.addEventListener('click',function(event){
+    if(visited){
+      alert('두 번은 못 갑니다.');
+      event.preventDefault(); //a태그 동작 막기 
+      return;   //이벤트 핸들러(함수)실행 종료 
+    }
+    visited=true;
+  })
 
+</script>
 
 <!-- 문제1. 로그인 -->
 <h4>로그인</h4>
 <div>
   <form id="login-form" action="/user/login.do" method="post">
     <div><input type="text" id="id" placeholder="Id"></div>
-    <div><input type="password" id="password" placeholder="Password"></div>
+    <div><input type="password" id="password" placeholder="password"></div>
     <div><button type="submit">Log In</button></div>
   </form>
 </div>
 <script>
   // 입력된 아이디와 비밀번호가 없으면 로그인을 막는 코드를 작성하시오.
+  const loginForm = document.getElementById('login-form')
+  const id= document.getElementById('id');
+  const password= document.getElementById('password');
+
+  loginForm.addEventListener('submit', function(event){
+    if(id.value===''){
+      alert('아이디를 입력하세요.')
+      id.focus();
+      event.preventDefault();//서브밋 취소?
+      return;
+    }
+    else if(password.value=== ''){
+      alelrt('비밀번호를 입력하세요')
+      password.focus();
+      event.preventDefault();
+      return;
+    }
+  })
 
 </script>
 <hr>
 
 
 
-<!-- 문제2. 전구 -->
 <h4>전구</h4>
 <div>
   <div id="light" class="light-on"></div>
@@ -244,14 +394,31 @@
     background-size: 100%;
   }
   .light-on {
-    background-image: url('../assets/images/lightOn.png');
+    background-image: url('../assets/images/light2.png');
   }
   .light-off {
-    background-image: url('../assets/images/lightOff.png');
+    background-image: url('../assets/images/light1.png');
   }
 </style>
 <script>
+
   // 버튼을 누를때마다 ON/OFF 버튼 텍스트와 lightOn.png/lightOff.png 이미지를 변환하도록 구현하시오.
+
+  const switchBtn = document.getElementById('switch-btn');
+  const light = document.getElementById('light');
+
+  switchBtn.addEventListener('click', function(event) {
+    const btn = event.currentTarget;
+    if(btn.textContent === 'ON') {  // if(btn.dataset.power === 'on')
+      light.className = 'light-off';
+      btn.dataset.power = 'off';
+      btn.textContent = 'OFF';
+    } else {
+      light.className = 'light-on';
+      btn.dataset.power = 'on';
+      btn.textContent = 'ON';
+    }
+  })
 
 </script>
 <hr>
@@ -266,10 +433,27 @@
   }
 </style>
 <div>
-  <input type="password" id="pw"><span id="eye" class="eye"><i class="fa-regular fa-eye-slash"></i></span>
+  <input type="password" id="pw">
+  <span id="eye" class="eye">
+    <i class="fa-regular fa-eye-slash"></i>
+  </span>
 </div>
 <script>
+  
   // 아이콘을 클릭할때마다 입력한 비밀번호를 보여주거나 숨기도록 구현하시오.
+
+  const pw = document.getElementById('pw');
+  const icon = document.querySelector('#eye > i');
+  
+  icon.addEventListener('click', function(event) {
+    if(icon.className.indexOf('fa-eye-slash') !== -1) {  // class 속성에 fa-eye-slash 가 포함되어 있으면
+      icon.className = 'fa-regular fa-eye';
+      pw.type = 'text';
+    } else {
+      icon.className = 'fa-regular fa-eye-slash';
+      pw.type = 'password';
+    }
+  })
 
 </script>
 <hr>
@@ -408,7 +592,24 @@
 </style>
 <script>
   // 전체 선택 체크 상자와 개별 선택 체크 상자가 상호 연동되도록 구현하시오.
+const chkAll = document.getElementById('chk-all');
+const chkEach = document.getElementsByClassName('chk-each');
 
+//전체선택 먼저 구현
+chkAll.addEventListener('click',function(event){
+  for(let i =0; i< chkEach,length; i++)
+    chkEach[i].checked=chkAll.checked;
+})
+
+//개별선택시 구현
+  for(let i =0; i<chkEach.length; i++){
+    chkEach[i].addEventListener('click',function(event){
+      let total=0;
+      for(let j =0; j < chkEach.length;j++)
+      total+=chkEach[j].checked;// 모두 체크되면 3이되어야함  true는 1로 누적되고 false는 0 으로 누적됨
+      chkAll.checked=total===chkEach.length;
+    })
+  }
 </script>
 <hr>
 
