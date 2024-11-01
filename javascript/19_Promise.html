@@ -8,7 +8,7 @@
 <body>
 
 <!--
-    비동기 작업
+    비동기 작업 (Asynchronous)
     1. 특정 코드 실행이 종료될때까지 기다리지 않고 다음 코드를 먼저 실행한다.
     2. 클라이언트가 서버로 데이터를 요청한 뒤 서버가 응답할때까지 사용자는 기다릴 필요가 없다.
     3. 콜백 함수로 비동기 처리 방식의 문제를 해결할 수 있으나 콜백 지옥(callback hell)에 빠질 수 있다.
@@ -23,7 +23,34 @@
         })
       })
 -->
+<h4>비동기 작업의 특징 이해하기</h4>
+<div>
+  <button type="button" onclick="doNotWork()">doNotWork</button>
+</div>
+<script>
+  const doNotWork = () => {
 
+    // 1. 변수 선언하기
+    let authorName;  // undefined
+
+    // 2. 비동기 작업 수행하기 (Fake API로 요청해서 응답 받아오기)
+    const xhr = new XMLHttpRequest();
+    const method = 'GET';
+    const url = 'https://thetestrequest.com/authors/3';
+    xhr.open(method, url);
+    xhr.addEventListener('load', function(event) {
+      // 객체의 구조 분해 할당 연습
+      const { id, name, email, avatar, created_at, updated_at } = JSON.parse(xhr.responseText);
+      authorName = name;
+    })
+    xhr.send();
+
+    // 3. 변수 확인하기
+    console.log(authorName);
+
+  }
+</script>
+<hr>
 <!--
     Promise
 
@@ -114,6 +141,68 @@
             .catch((error) => { error 처리 })
 -->
 
+<!--프로미스 형식 
+    new Promise( (resolve, reject) => {
+
+        resolve('success');
+
+        reject('fail');
+
+    }).then(res => {
+
+        console.log(res);  // success
+
+    }).catch(res => {
+
+        console.log(res);  // fail
+
+    })
+-->
+
+<h4>Promise 객체 사용하기(비동기 작업의 문제 해결)</h4>
+<div>
+  <button type="button" onclick="doWork()">doWork</button>
+</div>
+<script>
+
+  const doWork = () => {
+
+    // 1. 변수 선언하기
+    let authorName;  // undefined
+
+    // 2. Promise 객체 내부에서 비동기 작업 수행하기 (Fake API로 요청해서 응답 받아오기)
+    const objPromise = new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      const method = 'GET';
+      const url = 'https://thetestrequest.com/authors/3';
+      xhr.open(method, url);
+      // 비동기 작업 성공 : resolve 함수를 호출하라!
+      xhr.addEventListener('load', function(event) {
+        resolve(JSON.parse(xhr.responseText));
+      })
+      // 비동기 작업 실패 : reject 함수를 호출하라!
+      xhr.addEventListener('error', function(event) {
+        reject(xhr.status);
+      })
+      xhr.send();
+    })
+
+    // 3. Promise 객체의 메소드 실행(then 메소드에는 resolve 함수를 만들고, catch 메소드에는 reject 함수를 만든다.)
+    objPromise
+    .then(responseData => {
+      const { name } = responseData;
+      authorName = name;
+      console.log(authorName);
+    })
+    .catch(status => {
+      console.log(status);
+    });
+
+  }
+
+</script>
+<hr>
+
 <!--
     Promise Chaining
 
@@ -136,7 +225,29 @@
           .then((finalResult) => { finalResult 처리 })
           .catch((error) => { error 처리 })
 -->
+<h4>then()메소드 연결</h4>
+<div>
+  <button type="button" onclick="methodChain()">체이닝</button>
+</div>
+<script>
+  const methodChain=()=>{
 
+    
+    new Promise((resolve,reject)=>{
+      const xhr = new XMLHttpRequest();
+      const method = 'GET';
+      const url= 'https://thetestrequest.com/authors/1';
+      xhr.open(method, url);
+      xhr.addEventListener('load',function(event){
+        resolve(JSON.parse(xhr.responseText));
+      })
+      xhr.send();
+    })
+    .then(responseData=> responseData.name)
+    .then(name=> name + '님')
+    .then(authorName => console.log(authorName));
+  }
+</script>
 
 
 <!-- 문제1. Promise 를 이용하여 FakeAPI 정보 가져오기 -->
@@ -146,6 +257,30 @@
   <button type="button" onclick="fakeApi('https://thetestrequest.com/authors/2')">authors 2</button>
 </div>
 <script>
+    const fakeApi=(url)=>{
+      return new Promise((resolve,reject)=>
+      {
+        const xhr= new XMLHttpRequest();
+        const method='GET';
+        xhr.open(method,url);
+        
+      xhr.addEventListener('load',function(event){
+        resolve(JSON.parse(xhr.responseText));
+      })
+      
+      xhr.addEventListener('error',function(event){
+        reject(xhr.status);
+      
+      })
+      xhr.send();
+    })
+    .then(responseData=>{
+        console.log(responseData);
+    })
+    .catch((status)=>{
+        console.log(status);
+    })
+  }
 
 </script>
 <hr>
@@ -158,6 +293,29 @@
   <button type="button" id="get-info-btn">getInfo</button>
 </div>
 <script>
+
+  const getInfo=()=>{
+    return new Promise((resolve,reject)=>{
+      const xhr=new XMLHttpRequest();
+      const method='GET';
+      const url='https://thetestrequest.com/authors/1';
+      xhr.open(method,url);
+      xhr.addEventListener('load',function(event){
+        resolve(JSON.parse(xhr.responseText));
+      })
+      xhr.addEventListener('error', function(event){
+        reject(xhr.status);
+      })
+    });
+  }
+  const retValue=getInfo();
+  retValue.then().catch();
+  document.getElementById('get-info-btn').addEventListener('click',function(event){
+
+    getInfo()
+    .then(responseData=>console.log(responseData))
+    .catch(status=>console.log(status));
+  })
 
 </script>
 <hr>

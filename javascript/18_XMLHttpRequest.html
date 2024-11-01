@@ -254,8 +254,8 @@
         필수 | numOfRows  | 한 페이지 결과 수              | 1000
         필수 | base_date  | 발표일자                       | 20210628
         필수 | base_time  | 발표시각                       | 0500 (05시 발표)
-        필수 | nx         | 예보지점 X 좌표                | 87
-        필수 | ny         | 예보지점 Y 좌표                | 141
+        필수 | nx         | 예보지점 X 좌표                | 61
+        필수 | ny         | 예보지점 Y 좌표                | 125
         옵션 | dataType   | 요청자료형식                   | XML/JSON (디폴트 XML)
     
     4. 응답결과(Response Element)
@@ -282,7 +282,28 @@
   <div id="contents"></div>
 </div>
 <script>
-
+  document.getElementById('public-data-btn').addEventListener('click',function(event){
+    const xhr=new XMLHttpRequest();
+    const method='GET';
+    let url='http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst';
+          url+='?serviceKey=%2FrBX%2FsqVpUy4y3pd4bYyhjy%2B%2BXM5uPRALSZbgpM8GRbaRfR83Uc0cu5AV5JEvPmvQov83mhMT5IHQM2TN6kcdQ%3D%3D';
+          url+='&pageNo=1';
+          url+='&numOfRows=1000';
+          url+='&base_date=20241031';
+          url+='&base_time=0500';
+          url+='&nx=53';
+          url+='&ny=37';
+          url+='&dataType=JSON';
+          xhr.open(method,url);
+          xhr.addEventListener('load',function(event){
+            const responseData=JSON.parse(xhr.responseText);
+            console.log(responseData);
+          })
+          xhr.addEventListener('error',function(event){
+            console.log(xhr.status,xhr.statusText);
+          })
+          xhr.send();
+  })
 </script>
 <hr>
 
@@ -301,6 +322,31 @@
   <tbody id="photos"></tbody>
 </table>
 <script>
+  document.getElementById('get-photo-btn').addEventListener('click',function(event) {
+    const xhr=new XMLHttpRequest();
+    const method='GET';
+    let url='https://jsonplaceholder.typicode.com/photos';
+          xhr.open(method,url);
+          xhr.addEventListener('load',function(event){
+           const albumId=Number(document.getElementById('album-id').value) || 1;  
+           const responseData = JSON.parse(xhr.responseText);
+          {
+               let str='';
+               for(const photo of responseData) {
+              if(photo.albumId === albumId) {
+                   str += '<tr>';
+                   str += '  <td>' + photo.albumId + '</td>';
+                   str += '  <td><img src="' + photo.thumbnailUrl + '" width="50px"></td>';
+                   str += '  <td>' + photo.id + '</td>';
+                   str += '  <td><a href="' + photo.url + '" target="_blank">' + photo.title + '</a></td>';
+                   str += '</tr>';
+        }
+      }
+      document.getElementById('photos').innerHTML = str;
+          }
+          })
+          xhr.send();
+  })
   /* 
     https://jsonplaceholder.typicode.com/photos
     앨범마다 포토가 50개씩 들어있는 상황의 정보가 제공된다.

@@ -6,38 +6,10 @@
   <title>Document</title>
 </head>
 <body>
-  <h4>로그인</h4>
-  <div>
-    <form id="login-form" action="/user/login.do" method="post">
-      <div><input type="text" id="id" placeholder="Id"></div>
-      <div><input type="password" id="password" placeholder="Password"></div>
-      <div><button type="submit">Log In</button></div>
-    </form>
-  </div>
   <script>
-  
-    // 입력된 아이디와 비밀번호가 없으면 로그인을 막는 코드를 작성하시오.
-  
-    const loginForm = document.getElementById('login-form');
-    const id = document.getElementById('id');
-    const password = document.getElementById('password');
-  
-    loginForm.addEventListener('submit', function(event) {
-      
-      if(id.value === '') {
-        alert('아이디를 입력하세요');
-        id.focus();
-        event.preventDefault();  // 서브밋 취소
-        return;                  // 이벤트 핸들러 종료
-      } else if(password.value === '') {
-        alert('비밀번호를 입력하세요');
-        password.focus();
-        event.preventDefault();  // 서브밋 취소
-        return;                  // 이벤트 핸들러 종료
-      }
-    })
-  
+    let x ;
+    console.log(typeof x);
   </script>
-  <hr>
+
 </body>
 </html>
